@@ -1,7 +1,3 @@
-// alert("Hello World!")
-// console.log("Hello World")
-
-// getComputerChoice()
 // Computer can only get rock, paper, scissors.
 // Use Math.random(). It returns values between 0 and 1. So make rock between 0 and 0.33, paper between .34 and .66, scissors between 0.67 and 1. ✅
 
@@ -19,30 +15,23 @@ function getComputerChoice() {
     }
 }
 
-// console.log(getComputerChoice());
-
 function getHumanChoice() {
     let userChoice = prompt("What is your choice?", "")
     let userChoiceLowerCase = userChoice.toLowerCase();
     return userChoiceLowerCase;
 }
 
-
-// get choices from getComputerChoice and getHumanChoice. ✅
-// set rules of what wins between rock, paper and scissors
-// if rock and paper, paper wins. if paper and scissors, paper wins. if rock and scissors, rock wins.
-// keep track of scores
-
-
 function playRound(humanChoice, computerChoice) {
 
     let computerScore = 0;
     let humanScore = 0;
-    let human = humanChoice.toLowerCase();
-    let computer = computerChoice.toLowerCase();
+    let humanLowerCase = humanChoice.toLowerCase();
+    let computerLowerCase = computerChoice.toLowerCase();
+    let human = humanLowerCase.trim();
+    let computer = computerLowerCase.trim();
     
     //human wins
-    if (human=="rock" && computer=="scissors") {
+    if ((human=="rock" && computer=="scissors")|| (human=="paper" && computer=="rock") || (human=="scissors" && computer=="paper")){
         console.log("Human shows a " + human + ".");
         console.log("Computer shows a " + computer + ".");    
         console.log(human + " beats " + computer);
@@ -50,27 +39,21 @@ function playRound(humanChoice, computerChoice) {
         console.log("Human scores " + humanScore + " point!");
     }
 
-    else if (human=="paper" && computer=="rock") {
-        console.log("Human shows a " + human + ".");
-        console.log("Computer shows a " + computer + ".");  
-        console.log(human + " beats " + computer);
-        humanScore++;
-        console.log("Human scores " + humanScore + " point!");
-    }
-    
-    else if (human=="scissors" && computer=="paper") {
-        console.log("Human shows a " + human + ".");
-        console.log("Computer shows a " + computer + ".");  
-        console.log(human + " beats " + computer);
-        console.log("Human scores " + humanScore + " point!");
-        humanScore++;
-    }
-
     else if (human==computer) {
         console.log("Human shows a " + human + ".");
         console.log("Computer shows a " + computer + ".");  
         console.log(human + " and " + computer + " are the same so no point!");
     }
+    
+    //fix this when user inputs a blank
+    // else if (human.length=0) {
+    //     console.log("Human shows nothing.");
+    //     console.log("Computer shows a " + computer + ".");  
+    //     console.log(computer + " beats " + human);
+    //     computerScore++
+    //     console.log("Computer scores " + computerScore + " point!");
+    // }
+    
 
     // computer wins
     else {
@@ -83,38 +66,32 @@ function playRound(humanChoice, computerChoice) {
     return [humanScore, computerScore];
 }
 
+
 function playGame(){
 
-    let humanScore = 0;
-    let computerScore = 0;
-    for (i = 0; i<5; i++) {
+    let numberOfRounds = prompt("How many rounds to you want to play?","");
 
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-
-        scores = playRound(humanSelection, computerSelection);
-        if (scores[0]!=0) {
-            humanScore++;
-        }
-        if (scores[1]!=0) {
-            computerScore++;
-        }
+    if(isNaN(numberOfRounds)||numberOfRounds<1){
+        console.log("You need to enter a number!")
     }
-
-    console.log(humanScore,computerScore);
-
+    else {
+        let humanScore = 0;
+        let computerScore = 0;
+        for (i = 0; i<numberOfRounds; i++) {
+            const humanSelection = getHumanChoice();
+            const computerSelection = getComputerChoice();
+            
+            console.log(`Round ${i+1}.`)
+            scores = playRound(humanSelection, computerSelection);
+            if (scores[0]!=0) {
+                humanScore++;
+            }
+            if (scores[1]!=0) {
+                computerScore++;
+            }
+        console.log("\n\n\n");
+        }
+        console.log(`Human scores ${humanScore} points! Computer scores ${computerScore} points!`);
+    }
 }
-
 playGame();
-
-function playSumthing(){
-    for (i = 0; i < 5; i++) {
-        prompt("What's");
-    }
-}
-// playSumthing(); 
-
-// ask how many rounds are we playing?
-// start the first round, ask for the human choice, print the results of the first round..
-// start the second round, ask for the human choice, print the results..
-// so on until 5 rounds
