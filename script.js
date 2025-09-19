@@ -32,8 +32,8 @@ function playRound(humanChoice, computerChoice) {
     
     //human wins
     if ((human=="rock" && computer=="scissors")|| (human=="paper" && computer=="rock") || (human=="scissors" && computer=="paper")){
-        console.log("Human shows a " + human + ".");
-        console.log("Computer shows a " + computer + ".");    
+        console.log("You show " + human + ".");
+        console.log("Computer shows " + computer + ".");    
         console.log(human + " beats " + computer);
         humanScore++;
         console.log("Human scores " + humanScore + " point!");
@@ -69,6 +69,8 @@ function playRound(humanChoice, computerChoice) {
 
 function playGame(){
 
+    alert("Welcome to Jak-en-Poy! You will play against Lucas. Ready? Let's go!")
+
     let numberOfRounds = prompt("How many rounds to you want to play?","");
 
     if(isNaN(numberOfRounds)||numberOfRounds<1){
@@ -94,4 +96,6 @@ function playGame(){
         console.log(`Human scores ${humanScore} points! Computer scores ${computerScore} points!`);
     }
 }
-playGame();
+// playGame();
+
+
